@@ -38,6 +38,7 @@ header {
     height: 100%;
     padding: 1rem;
     border-right: 0.14rem solid #3b82f6;
+    
 
 }
 
@@ -89,4 +90,43 @@ header {
     position: absolute;
     opacity: 0;
     
+}
+
+.dates {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 20%;
+    margin-bottom: 2rem;
+}
+
+.dates > * {
+    background-color: #2a3047;
+    color: #e0e0e0;
+    border: 1px solid #3b82f6;
+    border-radius: 0.8rem;
+    height: 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.dates > *:hover{
+    background-color: #1e253e; 
+    color: #ffffff; 
+    border-color: #4fc3f7; 
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.6); 
+}
+
+.dates > *:active{
+    background-color: #162037; 
+    border-color: #3b82f6; 
+    transform: scale(0.98); 
+    
+}
+
+.dates >*.selected {
+    background-color: #3b82f6; 
+    color: #ffffff; 
+    border-color: #4fc3f7; 
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.8); 
 }
