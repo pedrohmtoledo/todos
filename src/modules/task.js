@@ -1,6 +1,8 @@
-import Todos from "./todos.js"
+import Task from "./todos.js"
+import createCard from "./cards.js";
 
 function openTaskDialog() {
+    
     const dialog = document.querySelector("#add-task-dialog");
     const title = document.getElementById("title");
     const description = document.getElementById("description");
@@ -27,9 +29,12 @@ function submitTask(e) {
         const description = document.getElementById("description").value;
         const datedue = document.getElementById("datedue").value;
         const priority = document.getElementById("priority").value;
-        const task = new Todos(title, description, datedue, priority);
-        console.log(task)
+        const task = new Task(title, description, datedue, priority);
+        console.log(typeof task.dueDate)
+        createCard(task);
+
         e.preventDefault();
+        
         dialog.close()
 
     }

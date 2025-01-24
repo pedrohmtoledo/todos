@@ -18,8 +18,7 @@ function renderStatic() {
         <div id="tasks"> 
             <button id="add-task" class="static-button"><span class="tooltip">Add a task</span></button>
             <div class="todos">
-                <div class="card">  bla bla</div>
-           
+              
             </div>
         </div>
     </div>
