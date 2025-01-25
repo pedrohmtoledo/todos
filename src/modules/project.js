@@ -1,3 +1,5 @@
+
+// class constructor of the projects
 class Projects {
     
     constructor(name) {

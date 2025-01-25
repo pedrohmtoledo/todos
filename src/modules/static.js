@@ -1,3 +1,5 @@
+
+// lading page html rendering function
 function renderStatic() {
     const body = document.querySelector("body");
     const staticContent = `    <header>

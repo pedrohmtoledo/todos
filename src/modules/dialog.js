@@ -1,3 +1,5 @@
+
+// dialog html function render
 function renderDialog() {
     const body = document.querySelector("body");
     const dialog = document.createElement("div")

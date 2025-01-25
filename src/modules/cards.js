@@ -1,7 +1,10 @@
 
+
+// function to create a card and render it to DOM
 function createCard(task){
     const card = document.createElement("div");
     card.setAttribute("class", "card");
+    card.setAttribute("id", task.id);
 
     const cardHeader = document.createElement("div");
     cardHeader.setAttribute("class", "card-header");
@@ -65,6 +68,12 @@ function createCard(task){
     
     todos.appendChild(card)
    
+}
+
+//function to delete card
+
+function deleteCard() {
+
 }
 
 export default createCard
