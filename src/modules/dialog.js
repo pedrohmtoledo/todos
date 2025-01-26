@@ -4,6 +4,7 @@ function renderDialog() {
     const body = document.querySelector("body");
     const dialog = document.createElement("div")
     const dialogContent = `<dialog id="add-task-dialog" method="dialog">
+                <div id="cardid"></div>
                 <h3>TASK</h3>
                 <form id="task-form">
                     
