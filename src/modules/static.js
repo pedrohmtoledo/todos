@@ -3,7 +3,7 @@
 function renderStatic() {
     const body = document.querySelector("body");
     const staticContent = `    <header>
-        <h1> TODOS </h1>
+        <h1> TODOS LIST </h1>
     </header>
     <div class="container">
         <div id="left-bar">

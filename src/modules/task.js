@@ -6,8 +6,8 @@ import { insertTaskToLocalStorage, getDialogValues, getDialogElements, editTaskO
 function openTaskDialog() {
     
     const dialogElements = getDialogElements();
-    resetDialogValues(dialogElements)
-    dialogElements.dialog.show()
+    resetDialogValues(dialogElements);
+    dialogElements.dialog.show();
 
 }
 // after user fills his task information and click submit button, this fucntion will be called the task will be loaded to localStorage 
@@ -18,33 +18,25 @@ function submitTask(e) {
     if (!dialogElements.form.checkValidity()){
         e.preventDefault();
     
-
     } else if (!dialogValues.cardid){
         e.preventDefault();
         insertTaskToLocalStorage(dialogValues);
         displayCards(); // display all cards again
-        dialogElements.dialog.close()
+        dialogElements.dialog.close();
 
     } else {
         e.preventDefault();
-        console.log(dialogValues.cardid)
-        editTaskOnLocalStorage(dialogValues, dialogValues.cardid)
+        editTaskOnLocalStorage(dialogValues, dialogValues.cardid);
         displayCards(); // display all cards again
-        dialogElements.dialog.close()
-
+        dialogElements.dialog.close();
     }
     
 }
 
 function editTaskDialog(cardId) {
-   
-    const dialogElements = getDialogElements();
-        
-    setDialogValues(dialogElements, cardId)
-
-      
-    dialogElements.dialog.show()
-
+    const dialogElements = getDialogElements();  
+    setDialogValues(dialogElements, cardId);
+    dialogElements.dialog.show();
 }
 
 

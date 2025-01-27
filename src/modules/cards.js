@@ -1,13 +1,9 @@
-import { openTaskDialog, submitTask, editTaskDialog } from "../modules/task.js"
+import { deleteTaskFromLocalStorage, clearAllCards } from "./helper.js";
 
-// function to create a card and render it to DOM
+// function to display all card on screen designated area
 function displayCards(){
-    const todos = document.querySelector(".todos");
-    
-    while(todos.firstChild) {
-        todos.removeChild(todos.firstChild);
-    }
-    
+
+    clearAllCards() // clear all card before rendering them
 
     for(let i = 0; i < localStorage.length; i++ ){
         let key = localStorage.key(i)
@@ -70,25 +66,23 @@ function displayCards(){
    
 }
 
-//function to delete card
+//function to delete card, it gets the id of the delete button and delete the task that matches that id
 
 function deleteCard(e) {
     
     if (e.target.classList.contains("card-delete")) {
         const cardId = e.target.id;
-        localStorage.removeItem(cardId)
-        displayCards()
-    
+        deleteTaskFromLocalStorage(cardId);
+        displayCards();
     }
-
 }
 
+// function of editcard button, this will match the id of the edit button with user click and pass it to dialog for user to edit the task
 function editCard(e) {
     if (e.target.classList.contains("card-edit")) {
         const cardId = e.target.id;
         editTaskDialog(cardId);
-    }
-    
+    } 
 }
 
 export { displayCards, deleteCard, editCard} 
