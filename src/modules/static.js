@@ -8,10 +8,11 @@ function renderStatic() {
     <div class="container">
         <div id="left-bar">
             <div class="dates">
+                
                 <button id="today">Today</button>
-                <button id="today">Week</button>
-                <button id="today">Month</button>
-                <button id="today">All</button>
+                <button id="week">Week</button>
+                <button id="month">Month</button>
+                <button id="all">All</button>
 
             </div>
             <button id="add-project" class="static-button"><span class="tooltip">Add a project</span></button>

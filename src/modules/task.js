@@ -1,6 +1,7 @@
 import Task from "./todos.js"
 import { displayCards, deleteCard } from "./cards.js"
 import { insertTaskToLocalStorage, getDialogValues, getDialogElements, editTaskOnLocalStorage, resetDialogValues, setDialogValues } from "./helper.js";
+import { dateFilter } from "./filter.js";
 
 //Function to open dialog when add-task button is clicked.
 function openTaskDialog() {
@@ -13,6 +14,7 @@ function openTaskDialog() {
 // after user fills his task information and click submit button, this fucntion will be called the task will be loaded to localStorage 
 function submitTask(e) {
     const dialogValues = getDialogValues();
+    
     const dialogElements = getDialogElements();
         
     if (!dialogElements.form.checkValidity()){
@@ -21,13 +23,13 @@ function submitTask(e) {
     } else if (!dialogValues.cardid){
         e.preventDefault();
         insertTaskToLocalStorage(dialogValues);
-        displayCards(); // display all cards again
+        displayCards(dateFilter); // display all cards again
         dialogElements.dialog.close();
 
     } else {
         e.preventDefault();
         editTaskOnLocalStorage(dialogValues, dialogValues.cardid);
-        displayCards(); // display all cards again
+        displayCards(dateFilter); // display all cards again
         dialogElements.dialog.close();
     }
     
