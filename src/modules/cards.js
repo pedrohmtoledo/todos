@@ -1,6 +1,6 @@
 import { deleteTaskFromLocalStorage, clearAllCards, createACard } from "./helper.js";
 import { editTaskDialog } from "./task.js";
-import { currentDateFilter, filterFunctions, filteredStorage, dateFilter } from "./filter.js";
+import { dateFilter } from "./filter.js";
 
 // function to display cards cards with any given filter
 function displayCards(){

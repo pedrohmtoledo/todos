@@ -1,14 +1,12 @@
 import "../styles/static.css"
 import "../styles/cards.css"
-import taskIMg from "../img/task.svg"
-import Task from "../modules/todos.js"
-import Projects from "../modules/project.js"
 import renderStatic from "../modules/static.js"
 import "../styles/dialog.css"
-import { openTaskDialog, submitTask, editTaskDialog } from "../modules/task.js"
+import { openTaskDialog, submitTask } from "../modules/task.js"
 import renderDialog from "../modules/dialog.js"
 import { displayCards, deleteCard, editCard } from "../modules/cards.js"
-import { todayFilter, currentDateFilter, dateFilter } from "./filter.js"
+import {  dateFilter } from "./filter.js"
+import { highlightSelectedFilter } from "./helper.js"
 
 
 function dom() {
@@ -41,30 +39,28 @@ function dom() {
     //button to filter tasks due to today
     todayButton.addEventListener("click", () => {
         dateFilter.setToday()
-        displayCards();
-        
+        highlightSelectedFilter(dateFilter.getFilter());
+        displayCards();  
     })
 
     // button to filter tasks due to current week
     weekButton.addEventListener("click", () => {
-        
         dateFilter.setWeek();
-        displayCards();
-        
+        highlightSelectedFilter(dateFilter.getFilter());
+        displayCards(); 
     })
 
     // button to filter tasks due to current month
     monthButton.addEventListener("click", () => {
-        
         dateFilter.setMonth();
-        displayCards();
-        
+        highlightSelectedFilter(dateFilter.getFilter());
+        displayCards();  
     })
 
     // button show all tasks
     allButton.addEventListener("click", () => {
-        
         dateFilter.setAll();
+        highlightSelectedFilter(dateFilter.getFilter());
         displayCards();
         
     })

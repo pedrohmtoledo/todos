@@ -1,5 +1,4 @@
-import Task from "./todos.js"
-import { displayCards, deleteCard } from "./cards.js"
+import { displayCards } from "./cards.js"
 import { insertTaskToLocalStorage, getDialogValues, getDialogElements, editTaskOnLocalStorage, resetDialogValues, setDialogValues } from "./helper.js";
 import { dateFilter } from "./filter.js";
 

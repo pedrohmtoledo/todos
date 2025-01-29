@@ -1,5 +1,5 @@
 import Task from "./todos";
-import { format } from "date-fns";
+
 
 export function uniqueId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -135,3 +135,17 @@ export function createACard(task, key) {
     return card;
 }
 
+export function highlightSelectedFilter(filter){
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        if(button.id === filter){
+            button.classList.add("selected")
+
+        } else {
+            button.classList.remove("selected")
+        }
+         
+
+    })
+
+}

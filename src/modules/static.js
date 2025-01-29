@@ -15,6 +15,7 @@ function renderStatic() {
                 <button id="all">All</button>
 
             </div>
+            
             <button id="add-project" class="static-button"><span class="tooltip">Add a project</span></button>
             
         </div>

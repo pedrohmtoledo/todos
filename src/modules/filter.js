@@ -1,6 +1,4 @@
-import { clearAllCards } from "./helper";
-import { displayCards } from "./cards";
-import { isToday, formatDistance, subDays, format, isSameWeek, isSameMonth} from "date-fns";
+import { isToday, isSameWeek, isSameMonth} from "date-fns";
 
 
 
@@ -51,24 +49,6 @@ const currentDateFilter = function (){
     return {setToday, filteredStorage, setMonth, setWeek, setAll, getFilter}
 
 }
-// export function filteredStorage (){
-//     let filter = filterState();
-//     let storage = {}
-//     console.log("aqui")
-//     console.log(filter.getFilter())
-    
-    
-//     if(filter.getFilter() === "today"){
-//         storage = todayFilterFilter()   
-            
-            
-//     }else if(filter.getFilter() === "week"){
-//         storage = weekFilterFunction();
-
-//     }
-//     return storage
-
-// }
 
 function todayFilterFunction() {
     let storage = {};

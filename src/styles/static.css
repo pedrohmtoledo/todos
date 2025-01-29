@@ -126,16 +126,11 @@ header h1 {
     box-shadow: 0 0 8px rgba(59, 130, 246, 0.6); 
 }
 
-.dates > *:active{
-    background-color: #162037; 
-    border-color: #3b82f6; 
-   
-    
-}
 
-.dates >*.selected {
-    background-color: #3b82f6; 
+
+.selected {
+    background-color: #1e253e; 
     color: #ffffff; 
     border-color: #4fc3f7; 
-    box-shadow: 0 0 8px rgba(59, 130, 246, 0.8); 
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.6); 
 }
