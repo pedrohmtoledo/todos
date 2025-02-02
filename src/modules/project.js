@@ -1,7 +1,8 @@
-import { createProjectList, getProjectDialogElements, resetDialogValues, getProjectDialogValues, inserProjectToLocalStorage, clearAllProjects, deleteProjectFromLocalStorage, setProjectDialogValues, editProjectOnLocalStorage } from "./helper";
+import { createProjectList, getProjectDialogElements, deleteProjectFromDropDownMenu, resetDialogValues, updateProjectDropDown, getProjectDialogValues, inserProjectToLocalStorage, clearAllProjects, deleteProjectFromLocalStorage, setProjectDialogValues, editProjectOnLocalStorage } from "./helper";
 
 function displayProject() {
     clearAllProjects();
+    updateProjectDropDown();
     
 
     const projects = JSON.parse(localStorage.getItem("projects"));
@@ -43,6 +44,9 @@ function submitProject(e) {
         dialogElements.projectDialog.close();
 
     }
+    updateProjectDropDown();
+
+
     displayProject();
 
 }
@@ -52,6 +56,7 @@ function deleteProject(e) {
     if (e.target.classList.contains("project-delete")) {
         const projectId = e.target.id;
         deleteProjectFromLocalStorage(projectId);
+        updateProjectDropDown();
         displayProject();
     }
 }

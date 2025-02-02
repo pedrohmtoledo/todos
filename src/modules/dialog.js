@@ -22,6 +22,12 @@ export function renderTaskDialog() {
                         <option value="high">High</option>
                     </select>
                     </label> 
+                    <label for="project"> Projects </label>
+                    <select id="project">
+                        <option value="" disabled selected>Select Project</option>
+                    </select>
+                    </label> 
+
                     <div class="dialog-buttons">
                         <button type="button" id="submit-task"> Submit</button>
                         <button type="button" class="close-dialog">Cancel</button>

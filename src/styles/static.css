@@ -65,12 +65,7 @@ header h1 {
     justify-content: space-between;
     padding: 1rem;
 }
-#projects > p {
-    font-size: 2rem;
-    padding-left: 4rem;
-    justify-self: center;
-    align-self: center;
-}
+
 .static-button {
     background-color: #eff0f5;
     border: 0.12px solid rgb(255, 255, 255);

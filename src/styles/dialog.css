@@ -63,7 +63,7 @@ dialog > h3 {
     outline: none;
 }
 
-#priority {
+#priority, #project {
     background-color: #1a1f38;
     color: #e0e0e0;
     border: 1px solid rgba(255, 255, 255, 0.1);

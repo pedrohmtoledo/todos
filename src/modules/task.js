@@ -1,9 +1,11 @@
 
 import { insertTaskToLocalStorage, getTaskDialogValues, getTaskDialogElements, editTaskOnLocalStorage, resetDialogValues, setTaskDialogValues, deleteTaskFromLocalStorage, clearAllCards, createACard  } from "./helper.js";
 import { dateFilter } from "./filter.js";
+import { renderTaskDialog } from "../modules/dialog.js"
 
 //Function to open dialog when add-task button is clicked.
 function openTaskDialog() {
+    renderTaskDialog();
     
     const dialogElements = getTaskDialogElements();
     resetDialogValues(dialogElements);
@@ -34,8 +36,8 @@ function submitTask(e) {
 }
 
 function editTaskDialog(cardId) {
+    renderTaskDialog();
     const dialogElements = getTaskDialogElements(); 
-    console.log(cardId) 
     setTaskDialogValues(dialogElements, cardId);
     dialogElements.taskDialog.show();
 }

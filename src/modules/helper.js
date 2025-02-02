@@ -9,13 +9,12 @@ export function getTaskDialogValues() {
     
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
-    const projectTitle = document.getElementById("project-title").value;
-    const projectDescription = document.getElementById("project-description").value;
     const dueDate = document.getElementById("datedue").value;
     const priority = document.getElementById("priority").value;
     const cardId = document.getElementById("cardid").value;
+    const project = document.getElementById("project").value
    
-    return { title, description, dueDate, priority, cardId, projectTitle, projectDescription};
+    return { title, description, dueDate, priority, cardId, project};
 }
 
 // get all values from project dialog box that user has inserted to later add to local storage
@@ -38,8 +37,9 @@ export function getTaskDialogElements() {
     const dueDate = document.getElementById("datedue");
     const priority = document.getElementById("priority");
     const cardId = document.getElementById("cardid");
+    const project = document.getElementById("project")
     
-    return { taskDialog, taskForm, title, description, dueDate, priority, cardId};
+    return { taskDialog, taskForm, title, description, dueDate, priority, cardId, project};
 
 }
 // get elements from project dialog to handle dom
@@ -57,22 +57,46 @@ export function getProjectDialogElements() {
 export function inserProjectToLocalStorage(values){
     const project = new Project(values.title, values.description)
     const newId = uniqueId();
-    
+     
 
     if("projects" in localStorage){
         const projects = JSON.parse(localStorage.getItem("projects"))
         projects[newId] = project;
         localStorage.setItem("projects", JSON.stringify(projects))
     } else {
-        const newProject = { newId : projects};
+        const newProject = {};
+        newProject[newId] = project;
         localStorage.setItem("projects", JSON.stringify(newProject))
     }
-    
+}   
 
+function projectList() {
+    let projectList = "";
+    const projects = JSON.parse(localStorage.getItem("projects"));
+    
+    for(const key in projects){
+        
+        projectList += `<option value="${key}">${projects[key].title}</option>`
+    }
+    return projectList;
 
 }
+export function updateProjectDropDown(){
+        // update the project dropdown menu
+        const projectSelect = document.getElementById("project");
+   
+        projectSelect.innerHTML = `<option value="" disabled selected>Select Project</option>` + projectList();
+ 
+}
+
+export function deleteProjectFromDropDownMenu(id){
+    const project = document.getElementById(id);
+    project.remove();
+}
+
+
 export function insertTaskToLocalStorage(values) {
-    const task = new Task(values.title, values.description, values.dueDate, values.priority);//create new task
+    const task = new Task(values.title, values.description, values.dueDate, values.priority, values.project);//create new task
     localStorage.setItem(uniqueId(), JSON.stringify(task)); // add new task to local storage
 }
 
@@ -89,7 +113,6 @@ export function setTaskDialogValues(elements, cardId){
     const task = JSON.parse(localStorage.getItem(cardId));
     for(const key in elements){
         if(key != "cardId"){
-            console.log(key)
             elements[key].value = task[key];
         }
     }
@@ -146,7 +169,7 @@ export function clearAllProjects() {
     }
 }
 export function createACard(task, key) {
-   
+ 
     const card = document.createElement("div");
     card.setAttribute("class", "card");
     card.setAttribute("id", key);
@@ -169,6 +192,9 @@ export function createACard(task, key) {
     const cardDueDate = document.createElement("div");
     cardDueDate.setAttribute("class", "card-duedate");
 
+    const cardProject = document.createElement("div");
+    cardProject.setAttribute("class", "card-project")
+
     const cardButtons = document.createElement("div");
     cardButtons.setAttribute("class", "card-buttons");
 
@@ -185,7 +211,9 @@ export function createACard(task, key) {
     
     cardPriority.textContent = task.priority;
     
-    cardDescription.textContent= task.description;
+    cardDescription.textContent = task.description;
+
+    
     
     cardDueDate.textContent = `Due date: ${task.dueDate}`;
     

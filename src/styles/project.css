@@ -1,3 +1,17 @@
+#allprojects {
+    font-size: 2rem;
+    background: none;
+    color: #e0e0e0;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+}
+#allprojects:hover {
+    transform: scale(1.12);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+
 #project-list {
     display: flex;
     flex-direction: column;
