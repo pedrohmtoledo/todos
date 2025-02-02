@@ -29,9 +29,7 @@ const currentDateFilter = function (){
         let storage = {};  
  
         if(filter === "today"){
-            storage = todayFilterFunction()  
-            console.log(storage) 
-                
+            storage = todayFilterFunction()          
                 
         }else if(filter === "week"){
             storage = weekFilterFunction();
@@ -54,8 +52,8 @@ function todayFilterFunction() {
     let storage = {};
     for(let i = 0; i < localStorage.length; i++){
         const key = localStorage.key(i);
+        console.log(key)
         const task = JSON.parse(localStorage.getItem(key))
-        console.log(task.dueDate)
         if(isToday(task.dueDate)){
             storage[key] = task;
                        
@@ -98,9 +96,14 @@ function allFilterFunction() {
     let storage = {};
 
     for(let i = 0; i < localStorage.length; i++){
+        
         const key = localStorage.key(i);
-        const task = JSON.parse(localStorage.getItem(key))
-        storage[key] = task;        
+        if(key !== "projects"){
+            const task = JSON.parse(localStorage.getItem(key))
+            storage[key] = task; 
+          
+        }
+        
     }
 
     return storage

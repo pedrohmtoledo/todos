@@ -1,40 +1,57 @@
 import "../styles/static.css"
 import "../styles/cards.css"
-import renderStatic from "../modules/static.js"
+import "../styles/project.css"
 import "../styles/dialog.css"
-import { openTaskDialog, submitTask } from "../modules/task.js"
-import renderDialog from "../modules/dialog.js"
-import { displayCards, deleteCard, editCard } from "../modules/cards.js"
+import renderStatic from "../modules/static.js"
+import { openTaskDialog, submitTask, displayCards, deleteCard, editCard}  from "../modules/task.js"
+import { renderTaskDialog, renderProjectDialog } from "../modules/dialog.js"
 import {  dateFilter } from "./filter.js"
 import { highlightSelectedFilter } from "./helper.js"
+import { displayProject, openProjectDialog, submitProject, deleteProject, editProject } from "./project.js"
 
 
 function dom() {
     renderStatic();
-    renderDialog();
-    const dialog = document.querySelector("#add-task-dialog");
-    const addTaskbutton = document.querySelector("#add-task");
+    renderTaskDialog();
+    renderProjectDialog();
+    displayProject();
+
+    const taskDialog = document.querySelector("#add-task-dialog");
+    const projectDialog = document.querySelector("#add-project-dialog");
+    const addTaskButton = document.querySelector("#add-task");
+    const addProjectButton = document.querySelector("#add-project");
     const submitTaskButton = document.querySelector("#submit-task");
-    const closeDialogButton = document.querySelector(".close-dialog");
-    const container = document.querySelector(".container");
+    const submitProjectButton = document.querySelector("#submit-project")
+    const closeDialogButton = document.querySelectorAll(".close-dialog");
+    const taskContainer = document.querySelector("#tasks");
     const todayButton = document.querySelector("#today");
     const weekButton = document.querySelector("#week");
     const monthButton = document.querySelector("#month");
     const allButton = document.querySelector("#all");
+    const projectContainer = document.querySelector("#project-list")
 
 
-    addTaskbutton.addEventListener("click", openTaskDialog)
+    addTaskButton.addEventListener("click", openTaskDialog)
 
     submitTaskButton.addEventListener("click", submitTask)
 
-    closeDialogButton.addEventListener("click", () => {
-        dialog.close()
-    })
+    submitProjectButton.addEventListener("click", submitProject)
+
+    closeDialogButton.forEach((button) => button.addEventListener("click", () => {
+        taskDialog.close()
+        projectDialog.close()
+    }))
+
+    addProjectButton.addEventListener("click", openProjectDialog)
 
     // delete card button listener
-    container.addEventListener("click", deleteCard);
+    taskContainer.addEventListener("click", deleteCard);
     // edit card button listener
-    container.addEventListener("click", editCard);
+    taskContainer.addEventListener("click", editCard);
+    // delete project button listener
+    projectContainer.addEventListener("click", deleteProject);
+    // edit project button listener
+    projectContainer.addEventListener("click", editProject);
 
     //button to filter tasks due to today
     todayButton.addEventListener("click", () => {

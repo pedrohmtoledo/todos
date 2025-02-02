@@ -1,6 +1,6 @@
 
-// dialog html function render
-function renderDialog() {
+// task dialog html function render
+export function renderTaskDialog() {
     const body = document.querySelector("body");
     const dialog = document.createElement("div")
     const dialogContent = `<dialog id="add-task-dialog" method="dialog">
@@ -33,4 +33,28 @@ function renderDialog() {
 
 }
 
-export default renderDialog
+export function renderProjectDialog() {
+    const body = document.querySelector("body");
+    const dialog = document.createElement("div")
+    const dialogContent = `<dialog id="add-project-dialog" method="dialog">
+                <div id="projectid"></div>
+                <h3>PROJECT</h3>
+                <form id="project-form">
+                    
+                    <label for="project-title"> Title </label>
+                    <input type="text" id="project-title" name="title" placeholder="Enter project title" maxlength="15" required> 
+                    <label for="project-descrption"> Description</label>
+                    <textarea type="text" id="project-description" placeholder="Enter project description"  maxlength="200" required></textarea>
+                                    
+                    </label> 
+                    <div class="dialog-buttons">
+                        <button type="button" id="submit-project"> Submit</button>
+                        <button type="button" class="close-dialog">Cancel</button>
+                    </div>
+                </form>
+            </dialog>`;
+    dialog.innerHTML = dialogContent
+    body.appendChild(dialog)
+
+}
+

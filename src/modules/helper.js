@@ -1,37 +1,76 @@
-import Task from "./todos";
-
+import {Task, Project} from "./todos";
 
 export function uniqueId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
-// get all values from dialog box that user has inserted to later add to local storage
-export function getDialogValues() {
+// get all values from task dialog box that user has inserted to later add to local storage
+export function getTaskDialogValues() {
     
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
+    const projectTitle = document.getElementById("project-title").value;
+    const projectDescription = document.getElementById("project-description").value;
     const dueDate = document.getElementById("datedue").value;
     const priority = document.getElementById("priority").value;
-    const cardid = document.getElementById("cardid").value;
+    const cardId = document.getElementById("cardid").value;
    
-    return { title, description, dueDate, priority, cardid};
+    return { title, description, dueDate, priority, cardId, projectTitle, projectDescription};
 }
 
-// get elements from dialog to handle dom
-export function getDialogElements() {
-    const dialog = document.querySelector("#add-task-dialog");
-    const form = document.getElementById("task-form");
+// get all values from project dialog box that user has inserted to later add to local storage
+export function getProjectDialogValues() {
+    
+    const title = document.getElementById("project-title").value;
+    const description= document.getElementById("project-description").value;
+    const projectId = document.getElementById("projectid").value
+
+   
+    return { title, description, projectId};
+}
+
+// get elements from task dialog to handle dom
+export function getTaskDialogElements() {
+    const taskDialog = document.querySelector("#add-task-dialog");
+    const taskForm = document.getElementById("task-form") 
     const title = document.getElementById("title");
     const description = document.getElementById("description");
     const dueDate = document.getElementById("datedue");
     const priority = document.getElementById("priority");
-    const cardid = document.getElementById("cardid");
+    const cardId = document.getElementById("cardid");
     
-    return { dialog, form, title, description, dueDate, priority, cardid};
+    return { taskDialog, taskForm, title, description, dueDate, priority, cardId};
+
+}
+// get elements from project dialog to handle dom
+export function getProjectDialogElements() {
+    const projectDialog = document.querySelector("#add-project-dialog");
+    const projectForm = document.getElementById("project-form");
+    const title = document.getElementById("project-title");
+    const description = document.getElementById("project-description");
+    const projectId = document.getElementById("projectid")
+    
+    return { projectDialog, projectForm, description, title, projectId};
 
 }
 
+export function inserProjectToLocalStorage(values){
+    const project = new Project(values.title, values.description)
+    const newId = uniqueId();
+    
 
+    if("projects" in localStorage){
+        const projects = JSON.parse(localStorage.getItem("projects"))
+        projects[newId] = project;
+        localStorage.setItem("projects", JSON.stringify(projects))
+    } else {
+        const newProject = { newId : projects};
+        localStorage.setItem("projects", JSON.stringify(newProject))
+    }
+    
+
+
+}
 export function insertTaskToLocalStorage(values) {
     const task = new Task(values.title, values.description, values.dueDate, values.priority);//create new task
     localStorage.setItem(uniqueId(), JSON.stringify(task)); // add new task to local storage
@@ -46,27 +85,50 @@ export function resetDialogValues(elements){
 
 // this function puts the tasks values on the dialog fields when user clicks edit button
 
-export function setDialogValues(elements, cardId){
+export function setTaskDialogValues(elements, cardId){
     const task = JSON.parse(localStorage.getItem(cardId));
     for(const key in elements){
-        if(key != "cardid"){
-            console.log(task[key])
+        if(key != "cardId"){
+            console.log(key)
             elements[key].value = task[key];
         }
     }
-    elements["cardid"].value = cardId;
+    elements["cardId"].value = cardId;
+}
+
+export function setProjectDialogValues(elements, projectId){
+    const projects = JSON.parse(localStorage.getItem("projects"));
+    const project = projects[projectId];
+   
+    for (const key in elements){
+        console.log(key)
+        elements[key].value = project[key];
+    }
+    elements["projectId"].value = projectId;
+
 }
 
 // set new values for the task that user has edited
 export function editTaskOnLocalStorage(values, id){
-    console.log(values)
     const task = new Task(values.title, values.description, values.dueDate, values.priority);//create new 
     localStorage.setItem(id, JSON.stringify(task)); // override the values of that task in local storage
 
 }
-
+export function editProjectOnLocalStorage(values, id){
+    const projects = JSON.parse(localStorage.getItem("projects"));
+    const project = new Project(values.title, values.description);
+    delete projects[id];
+    projects[id] = project;
+    localStorage.setItem("projects", JSON.stringify(projects));
+}
 export function deleteTaskFromLocalStorage(id){
     localStorage.removeItem(id);
+}
+
+export function deleteProjectFromLocalStorage(id){
+    const projects = JSON.parse(localStorage.getItem("projects"));
+    delete projects[id]
+    localStorage.setItem("projects", JSON.stringify(projects));
 }
 
 export function clearAllCards() {
@@ -77,10 +139,12 @@ export function clearAllCards() {
     }
 }
 
-export function displayCard(card){
-    // todo
+export function clearAllProjects() {
+    const projects = document.querySelector("#project-list")
+    while(projects.firstChild) {
+        projects.removeChild(projects.firstChild);
+    }
 }
-
 export function createACard(task, key) {
    
     const card = document.createElement("div");
@@ -143,9 +207,38 @@ export function highlightSelectedFilter(filter){
 
         } else {
             button.classList.remove("selected")
-        }
-         
-
+        }       
     })
+}
+
+export function createProjectList(proj, key){
+
+
+    const project = document.createElement("div");
+    project.setAttribute("class", "project")
+    project.setAttribute("id", key)
+
+    const projectTitle = document.createElement("button");
+    projectTitle.setAttribute("class", "project-title");
+
+    const projectButtons = document.createElement("div");
+    projectButtons.setAttribute("class", "project-buttons-container");
+
+    const projectEditButton = document.createElement("button");
+    projectEditButton.setAttribute("class", "project-edit project-button");
+    projectEditButton.setAttribute("id", key);
+
+    const projectDeleteButton = document.createElement("button");
+    projectDeleteButton.setAttribute("class", "project-delete project-button");
+    projectDeleteButton.setAttribute("id", key);
+
+    projectTitle.textContent = proj.title;
+    projectDeleteButton.textContent = "Delete";
+    projectEditButton.textContent = "Edit";
+
+    projectButtons.append(projectEditButton, projectDeleteButton);
+    project.append(projectTitle, projectButtons, projectEditButton, projectDeleteButton);
+
+    return project
 
 }
