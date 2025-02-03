@@ -85,12 +85,12 @@ header h1 {
 
 }
 #add-task {
-    background-image: url("~/home/pedro/repos/template/src/img/task.svg");
+    background-image: url("/src/img/task.svg");
 
 }
 
 #add-project {
-    background-image: url("~/home/pedro/repos/template/src/img/project.svg");
+    background-image: url("/src/img/project.svg");
     align-self: end;
 
 }
