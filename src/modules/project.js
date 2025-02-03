@@ -74,5 +74,13 @@ function editProjectDialog(projectId) {
     dialogElements.projectDialog.show();
 }
 
+function getProjectFilter(e) {
+    
+    if(e.target.classList.contains("project-title")){
+       return e.target.id
+    }
+   
+}
 
-export { openProjectDialog, submitProject, displayProject, deleteProject, editProject}
+
+export { openProjectDialog, submitProject, displayProject, deleteProject, editProject, getProjectFilter}

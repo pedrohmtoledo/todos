@@ -52,7 +52,6 @@ function todayFilterFunction() {
     let storage = {};
     for(let i = 0; i < localStorage.length; i++){
         const key = localStorage.key(i);
-        console.log(key)
         const task = JSON.parse(localStorage.getItem(key))
         if(isToday(task.dueDate)){
             storage[key] = task;
@@ -101,7 +100,7 @@ function allFilterFunction() {
         if(key !== "projects"){
             const task = JSON.parse(localStorage.getItem(key))
             storage[key] = task; 
-          
+                     
         }
         
     }
@@ -110,4 +109,30 @@ function allFilterFunction() {
 
 }
 
+export function currentProjectFilter() {
+ 
+    let projectFilter = "allprojects";
+
+    const setProjectFilter = (id) => {
+        projectFilter = id;
+    }
+    const filterProject = (currentDateFilteredStorage) => {
+        let storage = {};
+        if(projectFilter === "allprojects"){
+            return currentDateFilteredStorage;
+        }
+        for(const key in currentDateFilteredStorage){
+            if(projectFilter === currentDateFilteredStorage[key].project){
+              storage[key] = currentDateFilteredStorage[key];
+                           
+            }  
+        }
+        return storage
+
+    }
+    return { setProjectFilter, filterProject}
+
+
+}
+export const projectFilter = currentProjectFilter()
 export const dateFilter = currentDateFilter();

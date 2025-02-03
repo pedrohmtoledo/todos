@@ -1,4 +1,4 @@
-import {Task, Project} from "./todos";
+import {Task, Project} from "./todos.js";
 
 export function uniqueId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -133,7 +133,7 @@ export function setProjectDialogValues(elements, projectId){
 
 // set new values for the task that user has edited
 export function editTaskOnLocalStorage(values, id){
-    const task = new Task(values.title, values.description, values.dueDate, values.priority);//create new 
+    const task = new Task(values.title, values.description, values.dueDate, values.priority, values.project);//create new 
     localStorage.setItem(id, JSON.stringify(task)); // override the values of that task in local storage
 
 }
@@ -227,16 +227,30 @@ export function createACard(task, key) {
     return card;
 }
 
-export function highlightSelectedFilter(filter){
-    const buttons = document.querySelectorAll("button");
+export function highlightSelectedDate(filter){
+    const buttons = document.querySelectorAll(".date-button");
     buttons.forEach((button) => {
-        if(button.id === filter){
+        if(button.id === filter ){
             button.classList.add("selected")
 
         } else {
             button.classList.remove("selected")
         }       
     })
+}
+
+export function highlightSelectedProject(filter){
+    const buttons = document.querySelectorAll(".project")
+    buttons.forEach((button) => {
+        if(button.id === filter){
+            button.classList.add("selected")
+
+        } else {
+            button.classList.remove("selected")
+        }   
+        
+    })
+    
 }
 
 export function createProjectList(proj, key){
@@ -248,6 +262,7 @@ export function createProjectList(proj, key){
 
     const projectTitle = document.createElement("button");
     projectTitle.setAttribute("class", "project-title");
+    projectTitle.setAttribute("id", key);
 
     const projectButtons = document.createElement("div");
     projectButtons.setAttribute("class", "project-buttons-container");

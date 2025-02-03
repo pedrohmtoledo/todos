@@ -2,12 +2,12 @@ import "../styles/static.css"
 import "../styles/cards.css"
 import "../styles/project.css"
 import "../styles/dialog.css"
-import renderStatic from "../modules/static.js"
-import { openTaskDialog, submitTask, displayCards, deleteCard, editCard}  from "../modules/task.js"
-import { renderTaskDialog, renderProjectDialog } from "../modules/dialog.js"
-import {  dateFilter } from "./filter.js"
-import { highlightSelectedFilter } from "./helper.js"
-import { displayProject, openProjectDialog, submitProject, deleteProject, editProject } from "./project.js"
+import renderStatic from "../modules/static"
+import { openTaskDialog, submitTask, displayCards, deleteCard, editCard}  from "../modules/task"
+import { renderTaskDialog, renderProjectDialog } from "../modules/dialog"
+import {  dateFilter, projectFilter } from "./filter"
+import { highlightSelectedDate, highlightSelectedProject } from "./helper"
+import { displayProject, openProjectDialog, submitProject, deleteProject, editProject, getProjectFilter } from "./project"
 
 
 function dom() {
@@ -28,7 +28,7 @@ function dom() {
     const weekButton = document.querySelector("#week");
     const monthButton = document.querySelector("#month");
     const allButton = document.querySelector("#all");
-    const projectContainer = document.querySelector("#project-list")
+    const projectContainer = document.querySelector("#project-container")
 
 
     addTaskButton.addEventListener("click", openTaskDialog)
@@ -52,32 +52,39 @@ function dom() {
     projectContainer.addEventListener("click", deleteProject);
     // edit project button listener
     projectContainer.addEventListener("click", editProject);
+    // filter tasks by project button
+    projectContainer.addEventListener("click", (e) => {
+        const projectId = getProjectFilter(e);
+        projectFilter.setProjectFilter(projectId);
+        highlightSelectedProject(projectId)
+        displayCards();
+    })
 
     //button to filter tasks due to today
     todayButton.addEventListener("click", () => {
         dateFilter.setToday()
-        highlightSelectedFilter(dateFilter.getFilter());
+        highlightSelectedDate(dateFilter.getFilter());
         displayCards();  
     })
 
     // button to filter tasks due to current week
     weekButton.addEventListener("click", () => {
         dateFilter.setWeek();
-        highlightSelectedFilter(dateFilter.getFilter());
+        highlightSelectedDate(dateFilter.getFilter());
         displayCards(); 
     })
 
     // button to filter tasks due to current month
     monthButton.addEventListener("click", () => {
         dateFilter.setMonth();
-        highlightSelectedFilter(dateFilter.getFilter());
+        highlightSelectedDate(dateFilter.getFilter());
         displayCards();  
     })
 
     // button show all tasks
     allButton.addEventListener("click", () => {
         dateFilter.setAll();
-        highlightSelectedFilter(dateFilter.getFilter());
+        highlightSelectedDate(dateFilter.getFilter());
         displayCards();
         
     })

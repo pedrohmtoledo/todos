@@ -7,7 +7,6 @@ import renderStatic from "./modules/static.js"
 import "./styles/dialog.css"
 import { openTaskDialog, submitTask } from "./modules/task.js"
 import renderDialog from "./modules/dialog.js"
-import createCard from "./modules/cards.js"
 import dom from "./modules/dom.js"
 
 

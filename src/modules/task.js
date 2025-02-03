@@ -1,7 +1,7 @@
 
 import { insertTaskToLocalStorage, getTaskDialogValues, getTaskDialogElements, editTaskOnLocalStorage, resetDialogValues, setTaskDialogValues, deleteTaskFromLocalStorage, clearAllCards, createACard  } from "./helper.js";
-import { dateFilter } from "./filter.js";
-import { renderTaskDialog } from "../modules/dialog.js"
+import { dateFilter, projectFilter } from "./filter";
+import { renderTaskDialog } from "../modules/dialog"
 
 //Function to open dialog when add-task button is clicked.
 function openTaskDialog() {
@@ -48,14 +48,17 @@ function editTaskDialog(cardId) {
 function displayCards(){
     
     clearAllCards() // clear all card before rendering them
+
     
-    const dateFilteredStorage = dateFilter.filteredStorage(); // this function will filter all tasks by any filter selected and return it
-     
-    for (const key in dateFilteredStorage){ // loop to add tasks to the dom
+    const storage = projectFilter.filterProject(dateFilter.filteredStorage()); // this function will filter all tasks by any filter selected and return it
+    // projectAndDateFilteredStorage = projectFilter.filterProject(projectAndDateFilteredStorage);
+
+    
+    for (const key in storage){ // loop to add tasks to the dom
         
         if(key !== "projects"){
             
-            const card = createACard(dateFilteredStorage[key], key)
+            const card = createACard(storage[key], key)
             const todos = document.querySelector(".todos")
             
             todos.appendChild(card)
